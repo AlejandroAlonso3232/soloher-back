@@ -1,21 +1,30 @@
+# 🔥 SoloHER Backend API
 
----
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-green)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.x-lightgrey)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-brightgreen)](https://www.mongodb.com/)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/AlejandroAlonso3232/soloher-back/tests.yml?label=Tests)](https://github.com/AlejandroAlonso3232/soloher-back/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-### ✨ Características Especiales Incluidas:
-1. **Badges Dinámicos**: Muestra versión de tecnologías y estado de los tests.
-2. **Diagrama de Arquitectura**: Espacio para imagen explicativa (reemplazar placeholder).
-3. **Sintaxis de Tablas**: Documentación API clara y organizada.
-4. **Sección de Testing**: Con indicador de cobertura.
-5. **Estructura Visual del Proyecto**: Usando ASCII tree.
-6. **Tips Profesionales**: Recomendación para gestión de secrets.
+API backend para la plataforma SoloHER. Maneja autenticación, gestión de usuarios y operaciones principales.
 
----
+![SoloHER Architecture](https://via.placeholder.com/800x400.png?text=SoloHER+Backend+Diagram) <!-- Reemplaza con tu imagen -->
 
-### 📌 Pasos para Personalizar:
-1. Reemplaza `https://via.placeholder.com` con una imagen real de tu arquitectura.
-2. Actualiza los badges con tus URLs reales de GitHub Actions.
-3. Completa la documentación de Postman.
-4. Agrega más endpoints según tu API.
-5. Modifica la sección de "Hecho con ❤️" con tu información de contacto.
+## 🚀 Características Principales
+- **Autenticación JWT** 🔐
+- **CRUD de Usuarios** 👥
+- **Manejo de Perfiles** 📝
+- **API RESTful** 🌐
+- **Conexión a MongoDB** �
+- **Validación de Datos** ✅
 
-¿Necesitas ayuda para implementar alguna sección específica? 😊
+## 📦 Instalación
+```bash
+# Clona el repositorio
+git clone https://github.com/AlejandroAlonso3232/soloher-back.git
+
+# Instala dependencias
+npm install
+
+# Inicia el servidor en desarrollo
+npm run dev
