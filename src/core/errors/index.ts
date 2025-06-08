@@ -1,3 +1,4 @@
+import { Girl } from '../domain/entities/girl.entity';
 
 
 // errors.ts
@@ -52,3 +53,36 @@ export class CloudinaryError extends Error {
     super(message);
   }
 }
+
+export class GirlAlreadyExistsError extends Error {
+  constructor() {
+    super('Girl already exists');
+    this.name = 'GirlAlreadyExistsError';
+    }
+}
+export class GirlNotFoundError extends Error {
+  constructor() {
+    super('Girl not found');
+    this.name = 'GirlNotFoundError';
+  }
+}
+export class GirlUpdateError extends Error {
+    constructor() {
+        super('Error updating')
+        this.name = 'GirlUpdateError';
+    }}
+
+export class GirlDeleteError extends Error {
+    constructor() {
+        super('Error deleting')
+        this.name = 'GirlDeleteError';
+    }
+}
+
+export class GirlCreateError extends Error {
+    constructor() {
+        super('Error creating')
+        this.name = 'GirlCreateError';
+    }
+}
+

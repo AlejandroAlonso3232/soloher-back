@@ -11,6 +11,8 @@ import { AuthMiddleware } from "../../infrastructure/middlewares/authenticated";
 import { JWTAdapter } from "../../application/adapters/JWTAdapter";
 import { config } from "../../core/config/app.config";
 import { CloudinaryAdapter } from "../../application/adapters/CloudinaryAdapter";
+import { S3Adapter } from "../../application/adapters/s3.adapter";
+import s3Config from "../../core/config/s3.config";
 
 // En tu configuración
 const cloudinaryConfig = {
@@ -23,6 +25,7 @@ const cloudinaryConfig = {
 };
 
 // Inyección de dependencias
+const s3Adatpter = new S3Adapter(s3Config)
 export const cloudinaryAdapter = new CloudinaryAdapter(cloudinaryConfig);
 const userRepository = new UserRepository();
 const bcryptAdapter = new BcryptAdapter();
@@ -32,7 +35,8 @@ const userService = new UserService(
   userRepository,
   bcryptAdapter,
   jwtAdapter,
-  cloudinaryAdapter
+  s3Adatpter
+  // cloudinaryAdapter
 );
 const userController = new UserController(userService);
 

@@ -8,6 +8,16 @@ export interface UserDocument extends Omit<UserEntity, 'id'>, Document {
 
 const UserSchema = new Schema<UserDocument>({
     name: { type: String, required: true },
+    username: {
+        type: String, 
+        required: true, 
+        unique: true,
+        index: true,
+        validate: {
+            validator: (username: string) => /^[a-zA-Z0-9_]{3,30}$/.test(username),
+            message: 'El nombre de usuario debe tener entre 3 y 30 caracteres y solo puede contener letras, números y guiones bajos.'
+        }
+    },
      email: { 
       type: String, 
       required: true, 

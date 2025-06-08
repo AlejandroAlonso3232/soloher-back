@@ -4,18 +4,18 @@ import { CreateUserSchema } from "../../core/domain/schemas/user.schema";
 import { ZodError } from "zod";
 
 declare module "express" {
-    interface Request {
-        user?: {
-            id: string;
-            role: string;
-            isActive: boolean;
-        };
-        files?: {
-            imageProfile?: {
-                tempFilePath: string;
-            };
-        };
-    }
+  interface Request {
+    user?: {
+      id: string;
+      role: string;
+      isActive: boolean;
+    };
+    files?: {
+      imageProfile?: {
+        tempFilePath: string;
+      };
+    };
+  }
 }
 
 export class UserController {
@@ -48,19 +48,18 @@ export class UserController {
     });
   }
 
-
-    // Método para registrar un nuevo usuario
-    // /api/v1/user/register
-  async register(req: Request, res: Response) {
+  // Método para registrar un nuevo usuario
+  // /api/v1/user/register
+  async register(req: Request | any, res: Response) {
     try {
-        // Validar los datos de entrada utilizando Zod
+      // Validar los datos de entrada utilizando Zod
       const validateData = CreateUserSchema.parse(req.body);
       //mandar a la capa de servicio
       const user = await this.service.registerUser(validateData);
       //Respuesta de exito
       res.status(201).json(user);
     } catch (error: any) {
-        // Manejo de errores
+      // Manejo de errores
       this.handleError(res, error);
       // console.log(error);
 
@@ -71,24 +70,24 @@ export class UserController {
     }
   }
 
-    // Método para iniciar sesión
-    // /api/v1/user/login
-  async login(req: Request, res: Response) {
+  // Método para iniciar sesión
+  // /api/v1/user/login
+  async login(req: Request | any, res: Response | any) {
     try {
-        // Validar los datos de entrada
+      // Validar los datos de entrada
       const { email, password } = req.body;
-        // Verificar si el correo electrónico y la contraseña están presentes
-        if (!email || !password) {
-            return res.status(400).json({
-                message: "Email and password are required",
-            });
-            }
-        // Llamar al servicio de inicio de sesión
+      // Verificar si el correo electrónico y la contraseña están presentes
+      if (!email || !password) {
+        return res.status(400).json({
+          message: "Email and password are required",
+        });
+      }
+      // Llamar al servicio de inicio de sesión
       const user = await this.service.loginUser(email, password);
-        // Respuesta de éxito
+      // Respuesta de éxito
       res.status(200).json(user);
     } catch (error) {
-        // Manejo de errores
+      // Manejo de errores
       this.handleError(res, error);
       //  res.status(400).json({
       //     message: 'Validation error',
@@ -97,20 +96,19 @@ export class UserController {
     }
   }
 
-
-    // Método para obtener el perfil del usuario
-    // /api/v1/user/profile
-  async getProfile(req: Request, res: Response) {
+  // Método para obtener el perfil del usuario
+  // /api/v1/user/profile
+  async getProfile(req: Request | any, res: Response | any) {
     try {
-        // Verificar si el usuario está autenticado
+      // Verificar si el usuario está autenticado
       const userId = req.user?.id;
-     
-        // Llamar al servicio para obtener el perfil del usuario
+
+      // Llamar al servicio para obtener el perfil del usuario
       const user = await this.service.getUserProfile(userId || "");
-        //Respuesta de éxito
+      //Respuesta de éxito
       res.status(200).json(user);
     } catch (error) {
-        // Manejo de errores
+      // Manejo de errores
       this.handleError(res, error);
       //  res.status(400).json({
       //     message: 'Validation error',
@@ -119,35 +117,36 @@ export class UserController {
     }
   }
 
-    // Método para actualizar el perfil del usuario
-    // /api/v1/user/update
-  async updateUser(req: Request, res: Response) {
+  // Método para actualizar el perfil del usuario
+  // /api/v1/user/update
+  async updateUser(req: Request | any, res: Response | any) {
     try {
-        // Verificar si el usuario está autenticado
+      // Verificar si el usuario está autenticado
       const userId = req.user?.id;
-        // Validar los datos de entrada
+      // Validar los datos de entrada
       const userData = req.body;
-        // Verificar si se ha proporcionado un archivo de imagen
+      // Verificar si se ha proporcionado un archivo de imagen
       const imageProfile = req.files;
       // console.log(req);
 
       //si se proporciona un archivo de imagen, agregarlo a los datos del usuario
-      if (imageProfile) {
-        const image = imageProfile.imageProfile?.tempFilePath;
-        userData.imageProfile = image;
-      }
+      // if (imageProfile) {
+      //   const image = imageProfile.imageProfile?.tempFilePath;
+      //   userData.imageProfile = image;
+      // }
 
       // console.log(userData);
 
-        // Llamar al servicio para actualizar el perfil del usuario
+      // Llamar al servicio para actualizar el perfil del usuario
       const updatedUser = await this.service.updateUserProfile(
         userId || "",
-        userData
+        userData,
+        imageProfile?.imageProfile
       );
-        // Respuesta de éxito
+      // Respuesta de éxito
       res.status(200).json(updatedUser);
     } catch (error) {
-        // Manejo de errores
+      // Manejo de errores
       this.handleError(res, error);
       //  res.status(400).json({
       //     message: 'Validation error',
@@ -156,18 +155,18 @@ export class UserController {
     }
   }
 
-    // Método para eliminar el perfil del usuario
-    // /api/v1/user/deactivate
-  async deactivateUser(req: Request, res: Response) {
+  // Método para eliminar el perfil del usuario
+  // /api/v1/user/deactivate
+  async deactivateUser(req: Request | any, res: Response) {
     try {
-        // Verificar si el usuario está autenticado
+      // Verificar si el usuario está autenticado
       const userId = req.user?.id;
-        // Llamar al servicio para eliminar el perfil del usuario
+      // Llamar al servicio para eliminar el perfil del usuario
       const updatedUser = await this.service.deactivateUser(userId || "");
-        // Respuesta de éxito
+      // Respuesta de éxito
       res.status(200).json(updatedUser);
     } catch (error) {
-        // Manejo de errores
+      // Manejo de errores
       this.handleError(res, error);
       //  res.status(400).json({
       //     message: 'Validation error',

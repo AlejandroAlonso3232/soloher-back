@@ -99,9 +99,14 @@ export class CloudinaryAdapter {
    */
   async delete(publicId: string): Promise<void> {
     try {
-      await cloudinary.uploader.destroy(publicId, {
+      console.log("Deleting file with public ID:", publicId);
+      
+      const res = await cloudinary.uploader.destroy(publicId, {
         invalidate: true,
       });
+
+      // console.log("Delete response:", res);
+      
     } catch (error) {
       throw new CloudinaryError(
         "DELETE_FAILED",

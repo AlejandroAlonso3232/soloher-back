@@ -18,7 +18,7 @@ declare module 'express' {
 export class AuthMiddleware {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async authenticate(req: Request, res: Response, next: NextFunction) {
+  async authenticate(req: Request |any, res: Response, next: NextFunction) {
     try {
       const token = this.extractToken(req);
       const payload = this.verifyToken(token);
