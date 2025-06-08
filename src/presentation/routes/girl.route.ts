@@ -10,22 +10,22 @@ import { S3Adapter } from "../../application/adapters/s3.adapter";
 import  { s3ConfigGirls } from "../../core/config/s3.config";
 
 // En tu configuración
-const cloudinaryConfig = {
-  cloudName: config.CLOUDINARY_CLOUD_NAME!,
-  apiKey: config.CLOUDINARY_API_KEY!,
-  apiSecret: config.CLOUDINARY_API_SECRET!,
-  allowedFormats: ["jpg", "png", "webp"],
-  maxFileSizeMB: 10,
-  defaultFolder: "user_uploads",
-};
+// const cloudinaryConfig = {
+//   cloudName: config.CLOUDINARY_CLOUD_NAME!,
+//   apiKey: config.CLOUDINARY_API_KEY!,
+//   apiSecret: config.CLOUDINARY_API_SECRET!,
+//   allowedFormats: ["jpg", "png", "webp"],
+//   maxFileSizeMB: 10,
+//   defaultFolder: "user_uploads",
+// };
 
 // Inyección de dependencias
-const cloudinaryAdapter = new CloudinaryAdapter(cloudinaryConfig);
+// const cloudinaryAdapter = new CloudinaryAdapter(cloudinaryConfig);
 const girlRepository = new GirlRepository();
 const s3Adapter = new S3Adapter(s3ConfigGirls);
 const girlService = new GirlService(
   girlRepository,
-  cloudinaryAdapter,
+  // cloudinaryAdapter,
   s3Adapter
 );
 

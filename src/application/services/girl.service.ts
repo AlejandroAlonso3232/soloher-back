@@ -1,6 +1,9 @@
 import { CreateGirlDTO } from "../../core/domain/schemas/girl.schema";
 import { GirlAlreadyExistsError, GirlNotFoundError } from "../../core/errors";
-import { GetAllGirlsOptions, GirlRepository } from "../../infrastructure/database/repositories/girl.repository";
+import {
+  GetAllGirlsOptions,
+  GirlRepository,
+} from "../../infrastructure/database/repositories/girl.repository";
 import { CloudinaryAdapter } from "../adapters/CloudinaryAdapter";
 import slugify from "slugify";
 import { S3Adapter } from "../adapters/s3.adapter";
@@ -8,7 +11,7 @@ import { S3Adapter } from "../adapters/s3.adapter";
 export class GirlService {
   constructor(
     private readonly girlRepository: GirlRepository,
-    private readonly cloudinaryAdapter: CloudinaryAdapter,
+    // private readonly cloudinaryAdapter: CloudinaryAdapter,
     private readonly s3Adapter: S3Adapter
   ) {}
 
@@ -117,11 +120,9 @@ export class GirlService {
     //si el usuario ya tiene una imagen, la eliminamos de Cloudinary y subimos la nueva
     if (file) {
       if (existingGirl.publicId !== "") {
-        await this.cloudinaryAdapter.delete(existingGirl.publicId);
+        await this.s3Adapter.delete(existingGirl.publicId);
       }
-      const uploadResult = await this.s3Adapter.upload(file, {
-        folder: `girl/${existingGirl.name}+${existingGirl.username}`,
-      });
+      const uploadResult = await this.s3Adapter.upload(file);
 
       //generamos una url optimizada
       const optimizedImage = await this.s3Adapter.generateUrl(
@@ -187,7 +188,7 @@ export class GirlService {
 
     // Si la chica tiene una imagen, la eliminamos de Cloud
     if (girl.publicId !== "") {
-      (await this.cloudinaryAdapter.delete(girl.publicId)) as any;
+      (await this.s3Adapter.delete(girl.publicId)) as any;
     }
 
     const result = await this.girlRepository.deleteGirl(girl.id);

@@ -1,6 +1,9 @@
+import { PostEntity } from "../../../core/domain/entities/post.entity";
 import { CreateGirlDTO } from "../../../core/domain/schemas/girl.schema";
 import { mapper } from "../../../core/utils/mapper";
 import { GirlDocument, GirlModel } from "../models/girl.model";
+
+
 
 // Definir tipo para opciones de búsqueda
 export type GetAllGirlsOptions = {

@@ -15,18 +15,18 @@ import { S3Adapter } from "../../application/adapters/s3.adapter";
 import s3Config from "../../core/config/s3.config";
 
 // En tu configuración
-const cloudinaryConfig = {
-  cloudName: config.CLOUDINARY_CLOUD_NAME!,
-  apiKey: config.CLOUDINARY_API_KEY!,
-  apiSecret: config.CLOUDINARY_API_SECRET!,
-  allowedFormats: ["jpg", "png", "webp"],
-  maxFileSizeMB: 10,
-  defaultFolder: "user_uploads",
-};
+// const cloudinaryConfig = {
+//   cloudName: config.CLOUDINARY_CLOUD_NAME!,
+//   apiKey: config.CLOUDINARY_API_KEY!,
+//   apiSecret: config.CLOUDINARY_API_SECRET!,
+//   allowedFormats: ["jpg", "png", "webp"],
+//   maxFileSizeMB: 10,
+//   defaultFolder: "user_uploads",
+// };
 
 // Inyección de dependencias
 const s3Adatpter = new S3Adapter(s3Config)
-export const cloudinaryAdapter = new CloudinaryAdapter(cloudinaryConfig);
+// export const cloudinaryAdapter = new CloudinaryAdapter(cloudinaryConfig);
 const userRepository = new UserRepository();
 const bcryptAdapter = new BcryptAdapter();
 const jwtAdapter = new JWTAdapter(config.JWT_SECRET!);

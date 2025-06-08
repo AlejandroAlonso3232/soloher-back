@@ -51,13 +51,25 @@ girlSchema.pre<GirlDocument>("save", function (next) {
     this.isModified("name") ||
     this.isModified("age") ||
     this.isModified("country") ||
-    this.isModified("username")
+    this.isModified("username") ||
+    this.isModified("socials")
   ) {
     const tags = [];
     if (this.name) tags.push(this.name);
     if (this.age !== null) tags.push(`Edad: ${this.age}`);
     if (this.country) tags.push(this.country);
     if (this.username) tags.push(this.username);
+    if (this.socials) {
+      if (this.socials.twitter) tags.push(`Twitter: ${this.socials.twitter}`);
+      if (this.socials.instagram)
+        tags.push(`Instagram: ${this.socials.instagram}`);
+      if (this.socials.tiktok) tags.push(`TikTok: ${this.socials.tiktok}`);
+      if (this.socials.youtube) tags.push(`YouTube: ${this.socials.youtube}`);
+      if (this.socials.onlyfans)
+        tags.push(`OnlyFans: ${this.socials.onlyfans}`);
+      if (this.socials.fansly) tags.push(`Fansly: ${this.socials.fansly}`);
+      if (this.socials.other) tags.push(`Otro: ${this.socials.other}`);
+    }
     this.tags = Array.from(new Set(tags)); // Eliminar duplicados
   }
   next();
