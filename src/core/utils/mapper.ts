@@ -70,7 +70,7 @@ export const mapper = {
       })),
       status: post.status,
       visibility: post.visibility,
-      girl: post.girl.toString(), // Convertir ObjectId a string
+      girl: post.girl, // Convertir ObjectId a string
       likes: post.likes || 0,
       views: post.views || 0,
       shares: post.shares || 0,

@@ -154,16 +154,7 @@ const PostSchema = new Schema<IPost>(
 // Middleware (Hooks) con .pre()
 PostSchema.pre<IPost>("save", function (next) {
   // Generar slug automáticamente
-  if (this.isModified("title") && !this.slug) {
-    this.slug =
-      slugify(this.title, {
-        lower: true,
-        strict: true,
-        remove: /[*+~.()'"!:@]/g,
-      }) +
-      "-" +
-      uuidv4().substring(0, 8);
-  }
+  
 
   // Actualizar contadores multimedia
   if (this.isModified("content")) {

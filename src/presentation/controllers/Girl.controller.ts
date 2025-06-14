@@ -84,6 +84,7 @@ export class GirlController {
   }
 }
 
+
   async getGirlById(req: Request | any, res: Response) {
     try {
       const { id } = req.params;

@@ -152,12 +152,12 @@ export class PostRepository {
     const hasNextPage = page < totalPages;
 
     return {
-      data: posts.map((post) => mapper.toDomainPost(post)),
       total,
       page,
       limit,
       totalPages,
       hasNextPage,
+      data: posts.map((post) => mapper.toDomainPost(post)),
     };
   }
   async getPostById(id: string): Promise<PostEntity | null> {

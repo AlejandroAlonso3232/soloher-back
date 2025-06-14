@@ -86,3 +86,44 @@ export class GirlCreateError extends Error {
     }
 }
 
+export class PostAlreadyExistsError extends Error {
+  constructor() {
+    super('Post already exists');
+    this.name = 'PostAlreadyExistsError';
+  }
+}
+
+export class PostNotFoundError extends Error {
+  constructor() {
+    super('Post not found');
+    this.name = 'PostNotFoundError';
+  }
+}
+
+export class PostUpdateError extends Error {
+    constructor() {
+        super('Error updating post');
+        this.name = 'PostUpdateError';
+    }
+}
+
+export class PostDeleteError extends Error {
+    constructor() {
+        super('Error deleting post');
+        this.name = 'PostDeleteError';
+    }
+}
+
+export class PostCreateError extends Error {
+    constructor() {
+        super('Error creating post');
+        this.name = 'PostCreateError';
+    }
+}
+
+export class FileUploadError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'FileUploadError';
+    }
+}
