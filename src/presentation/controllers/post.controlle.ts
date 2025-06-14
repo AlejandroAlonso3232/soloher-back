@@ -167,7 +167,7 @@ export class PostController {
         }
       }
 
-      console.log(req.body.title);
+      // console.log(req.body.title);
       
 
       const post = await this.service.updatePost(id, req.body, images, videos);
